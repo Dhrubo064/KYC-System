@@ -1,5 +1,9 @@
 import { KYCSubmission } from '../types';
 
+interface ApiResponse {
+  summary: string;
+}
+
 export class SummaryService {
   async generateSummary(kycData: KYCSubmission): Promise<string> {
     try {
@@ -27,7 +31,7 @@ export class SummaryService {
           });
 
           if (response.ok) {
-            const data = await response.json();
+            const data = (await response.json()) as ApiResponse;
             return data.summary || this.fallbackSummary(kycData);
           }
         } catch (apiError) {

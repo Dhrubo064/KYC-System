@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import User from '../models/User';
-import { generateToken } from '../config/jwt';
 import { AuthRequest } from '../types';
+import { generateToken } from '../config/jwt';
 
 export class AuthController {
   async register(req: Request, res: Response): Promise<void> {
@@ -33,8 +33,9 @@ export class AuthController {
       await user.save();
       
       // Generate token
+      const userId = (user._id as any).toString();
       const token = generateToken({
-        userId: user._id.toString(),
+        userId,
         email: user.email,
         isAdmin: user.isAdmin
       });
@@ -81,8 +82,9 @@ export class AuthController {
       }
       
       // Generate token
+      const userId = (user._id as any).toString();
       const token = generateToken({
-        userId: user._id.toString(),
+        userId,
         email: user.email,
         isAdmin: user.isAdmin
       });
@@ -106,6 +108,7 @@ export class AuthController {
   
   async getCurrentUser(req: AuthRequest, res: Response): Promise<void> {
     try {
+      // Ensure that req.user is properly typed and available
       const user = await User.findById(req.user?.userId).select('-password');
       
       if (!user) {
