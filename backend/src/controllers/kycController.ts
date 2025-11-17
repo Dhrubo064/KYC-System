@@ -1,6 +1,7 @@
 import { Response } from 'express';
 import KYC from '../models/KYC';
 import queueService from '../services/queueService';
+import { multiLanguageService } from '../services/multiLanguageService';
 import { AuthRequest } from '../types';
 
 export class KYCController {
@@ -27,6 +28,7 @@ export class KYCController {
       }
       
       const kycData = req.body;
+      const preferredLanguage = req.body.preferredLanguage || 'English';
       
       // Validate required fields
       const requiredFields = [
@@ -40,6 +42,9 @@ export class KYCController {
           return;
         }
       }
+      
+      // Store preferred language
+      kycData.preferredLanguage = preferredLanguage;
       
       // Add to queue for processing
       const queued = await queueService.addToQueue(userId, kycData);
@@ -62,6 +67,7 @@ export class KYCController {
   async getMyKYC(req: AuthRequest, res: Response): Promise<void> {
     try {
       const userId = req.user?.userId;
+      const preferredLanguage = req.query.language as string || 'English';
       
       if (!userId) {
         res.status(401).json({ error: 'Unauthorized' });
@@ -74,8 +80,31 @@ export class KYCController {
         res.status(404).json({ error: 'No KYC submission found' });
         return;
       }
-      
-      res.json({ kyc });
+
+      // Translate summary and rejection reason if requested
+      if (preferredLanguage && preferredLanguage !== 'English') {
+        try {
+          const translated = await multiLanguageService.translateKYCResponse(
+            kyc.summary,
+            kyc.rejectionReason || null,
+            preferredLanguage
+          );
+          
+          // Return KYC with translated content
+          const kycResponse = kyc.toObject();
+          kycResponse.summary = translated.summary;
+          if (translated.rejectionReason) {
+            kycResponse.rejectionReason = translated.rejectionReason;
+          }
+          
+          res.json({ kyc: kycResponse });
+        } catch (translateError) {
+          console.error('Translation failed, returning original:', translateError);
+          res.json({ kyc });
+        }
+      } else {
+        res.json({ kyc });
+      }
     } catch (error: any) {
       console.error('Get KYC error:', error);
       res.status(500).json({ error: 'Failed to fetch KYC' });
@@ -85,6 +114,7 @@ export class KYCController {
   async getKYCStatus(req: AuthRequest, res: Response): Promise<void> {
     try {
       const userId = req.user?.userId;
+      const preferredLanguage = req.query.language as string || 'English';
       
       if (!userId) {
         res.status(401).json({ error: 'Unauthorized' });
@@ -97,12 +127,25 @@ export class KYCController {
         res.json({ status: 'not_submitted' });
         return;
       }
+
+      // Translate rejection reason if requested
+      let rejectionReason = kyc.rejectionReason;
+      if (preferredLanguage && preferredLanguage !== 'English' && kyc.rejectionReason) {
+        try {
+          rejectionReason = await multiLanguageService.translateText(
+            kyc.rejectionReason,
+            preferredLanguage
+          );
+        } catch (translateError) {
+          console.error('Translation failed, returning original:', translateError);
+        }
+      }
       
       res.json({ 
         status: kyc.status,
         submittedAt: kyc.createdAt,
         reviewedAt: kyc.reviewedAt,
-        rejectionReason: kyc.rejectionReason
+        rejectionReason: rejectionReason
       });
     } catch (error: any) {
       console.error('Get KYC status error:', error);

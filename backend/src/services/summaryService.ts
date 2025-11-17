@@ -1,4 +1,5 @@
 import { KYCSubmission } from '../types';
+import { llmService } from './llmService';
 
 interface ApiResponse {
   summary: string;
@@ -7,8 +8,33 @@ interface ApiResponse {
 export class SummaryService {
   async generateSummary(kycData: KYCSubmission): Promise<string> {
     try {
-      // Prepare the KYC data as text
-      const kycText = `
+      // Option 1: Use LLM-powered intelligent summarization (Claude)
+      if (process.env.ANTHROPIC_API_KEY && process.env.USE_LLM_SUMMARY === 'true') {
+        try {
+          const summary = await llmService.generateIntelligentSummary({
+            fullName: kycData.fullName,
+            dateOfBirth: new Date(kycData.dateOfBirth).toLocaleDateString(),
+            address: kycData.address,
+            city: kycData.city,
+            country: kycData.country,
+            postalCode: kycData.postalCode,
+            idType: kycData.idType,
+            idNumber: kycData.idNumber,
+            additionalInfo: kycData.additionalInfo,
+          });
+          console.log('Generated intelligent summary using LLM');
+          return summary;
+        } catch (llmError) {
+          console.error('LLM summarization failed, falling back to external API:', llmError);
+        }
+      }
+
+      // Option 2: Use external API for summarization
+      const apiUrl = process.env.SUMMARIZATION_API_URL;
+      
+      if (apiUrl) {
+        try {
+          const kycText = `
         Full Name: ${kycData.fullName}
         Date of Birth: ${kycData.dateOfBirth}
         Address: ${kycData.address}, ${kycData.city}, ${kycData.country} - ${kycData.postalCode}
@@ -17,11 +43,6 @@ export class SummaryService {
         Additional Information: ${kycData.additionalInfo || 'None'}
       `;
 
-      // Option 1: Use external API for summarization
-      const apiUrl = process.env.SUMMARIZATION_API_URL;
-      
-      if (apiUrl) {
-        try {
           const response = await fetch(apiUrl, {
             method: 'POST',
             headers: {
@@ -39,7 +60,7 @@ export class SummaryService {
         }
       }
 
-      // Option 2: Fallback to simple summary generation
+      // Option 3: Fallback to simple summary generation
       return this.fallbackSummary(kycData);
     } catch (error) {
       console.error('Error generating summary:', error);

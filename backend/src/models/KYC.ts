@@ -12,10 +12,18 @@ export interface IKYCDocument extends Document {
   idNumber: string;
   additionalInfo: string;
   summary: string;
+  multiLanguageSummary?: Record<string, string>;
+  preferredLanguage?: string;
   status: 'pending' | 'approved' | 'rejected';
   reviewedBy?: mongoose.Types.ObjectId;
   reviewedAt?: Date;
   rejectionReason?: string;
+  rejectionReasonMultiLang?: Record<string, string>;
+  riskAssessment?: {
+    level: 'low' | 'medium' | 'high';
+    details: string;
+    timestamp: Date;
+  };
   createdAt: Date;
 }
 
@@ -67,6 +75,14 @@ const KYCSchema = new Schema<IKYCDocument>({
     type: String,
     required: true
   },
+  multiLanguageSummary: {
+    type: Schema.Types.Mixed,
+    default: {}
+  },
+  preferredLanguage: {
+    type: String,
+    default: 'English'
+  },
   status: {
     type: String,
     enum: ['pending', 'approved', 'rejected'],
@@ -81,6 +97,18 @@ const KYCSchema = new Schema<IKYCDocument>({
   },
   rejectionReason: {
     type: String
+  },
+  rejectionReasonMultiLang: {
+    type: Schema.Types.Mixed,
+    default: {}
+  },
+  riskAssessment: {
+    level: {
+      type: String,
+      enum: ['low', 'medium', 'high']
+    },
+    details: String,
+    timestamp: Date
   },
   createdAt: {
     type: Date,

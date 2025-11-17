@@ -34,7 +34,7 @@ const KYCForm: React.FC = () => {
     setLoading(true);
 
     try {
-      const response = await kycService.submitKYC(formData);
+      await kycService.submitKYC(formData);
       setSuccess('KYC submitted successfully! Your application is being processed.');
       setTimeout(() => {
         navigate('/dashboard');

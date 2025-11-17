@@ -1,6 +1,9 @@
 import { Response } from 'express';
 import KYC from '../models/KYC';
 import pdfService from '../services/pdfService';
+import { rejectionReasonService } from '../services/rejectionReasonService';
+import { multiLanguageService } from '../services/multiLanguageService';
+import { llmService } from '../services/llmService';
 import { AuthRequest } from '../types';
 
 export class AdminController {
@@ -79,10 +82,10 @@ export class AdminController {
   async rejectKYC(req: AuthRequest, res: Response): Promise<void> {
     try {
       const { kycId } = req.params;
-      const { reason } = req.body;
+      const { reason, reasonType } = req.body;
       const adminId = req.user?.userId;
       
-      if (!reason) {
+      if (!reason && !reasonType) {
         res.status(400).json({ error: 'Rejection reason is required' });
         return;
       }
@@ -99,10 +102,42 @@ export class AdminController {
         return;
       }
       
+      // Generate professional rejection reason using LLM
+      let rejectionReason = reason;
+      try {
+        rejectionReason = await rejectionReasonService.generateRejectionReason({
+          fullName: kyc.fullName,
+          idType: kyc.idType,
+          idNumber: kyc.idNumber,
+          reason: reasonType || 'other',
+          customReason: reason,
+        });
+      } catch (llmError) {
+        console.error('LLM rejection reason generation failed, using provided reason:', llmError);
+        rejectionReason = reason;
+      }
+
+      // Generate multi-language rejection reasons if enabled
+      let rejectionReasonMultiLang: Record<string, string> = {};
+      if (process.env.USE_LLM_TRANSLATION === 'true' && kyc.preferredLanguage && kyc.preferredLanguage !== 'English') {
+        try {
+          const translatedReason = await multiLanguageService.translateText(
+            rejectionReason,
+            kyc.preferredLanguage
+          );
+          rejectionReasonMultiLang[kyc.preferredLanguage.toLowerCase()] = translatedReason;
+        } catch (translateError) {
+          console.error('Translation of rejection reason failed:', translateError);
+        }
+      }
+      
       kyc.status = 'rejected';
       kyc.reviewedBy = adminId as any;
       kyc.reviewedAt = new Date();
-      kyc.rejectionReason = reason;
+      kyc.rejectionReason = rejectionReason;
+      if (Object.keys(rejectionReasonMultiLang).length > 0) {
+        kyc.rejectionReasonMultiLang = rejectionReasonMultiLang;
+      }
       
       await kyc.save();
       

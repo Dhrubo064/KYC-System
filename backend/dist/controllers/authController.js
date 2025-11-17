@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
-const User_1 = __importDefault(require("../models/User")); // Ensure you import the correct User interface
+const User_1 = __importDefault(require("../models/User"));
 const jwt_1 = require("../config/jwt");
 class AuthController {
     async register(req, res) {
@@ -31,8 +31,9 @@ class AuthController {
             });
             await user.save();
             // Generate token
+            const userId = user._id.toString();
             const token = (0, jwt_1.generateToken)({
-                userId: user._id.toString(),
+                userId,
                 email: user.email,
                 isAdmin: user.isAdmin
             });
@@ -74,8 +75,9 @@ class AuthController {
                 return;
             }
             // Generate token
+            const userId = user._id.toString();
             const token = (0, jwt_1.generateToken)({
-                userId: user._id.toString(),
+                userId,
                 email: user.email,
                 isAdmin: user.isAdmin
             });

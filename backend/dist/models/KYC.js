@@ -82,6 +82,14 @@ const KYCSchema = new mongoose_1.Schema({
         type: String,
         required: true
     },
+    multiLanguageSummary: {
+        type: mongoose_1.Schema.Types.Mixed,
+        default: {}
+    },
+    preferredLanguage: {
+        type: String,
+        default: 'English'
+    },
     status: {
         type: String,
         enum: ['pending', 'approved', 'rejected'],
@@ -96,6 +104,18 @@ const KYCSchema = new mongoose_1.Schema({
     },
     rejectionReason: {
         type: String
+    },
+    rejectionReasonMultiLang: {
+        type: mongoose_1.Schema.Types.Mixed,
+        default: {}
+    },
+    riskAssessment: {
+        level: {
+            type: String,
+            enum: ['low', 'medium', 'high']
+        },
+        details: String,
+        timestamp: Date
     },
     createdAt: {
         type: Date,
