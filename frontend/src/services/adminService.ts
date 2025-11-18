@@ -2,18 +2,21 @@ import api from './api';
 import { KYC, KYCStats } from '../types';
 
 export const adminService = {
-  async getPendingKYCs(): Promise<{ kycs: KYC[] }> {
-    const response = await api.get('/admin/kyc/pending');
+  async getPendingKYCs(preferredLanguage?: string): Promise<{ kycs: KYC[] }> {
+    const params = preferredLanguage ? { language: preferredLanguage } : {};
+    const response = await api.get('/admin/kyc/pending', { params });
     return response.data;
   },
 
-  async getApprovedKYCs(): Promise<{ kycs: KYC[] }> {
-    const response = await api.get('/admin/kyc/approved');
+  async getApprovedKYCs(preferredLanguage?: string): Promise<{ kycs: KYC[] }> {
+    const params = preferredLanguage ? { language: preferredLanguage } : {};
+    const response = await api.get('/admin/kyc/approved', { params });
     return response.data;
   },
 
-  async getRejectedKYCs(): Promise<{ kycs: KYC[] }> {
-    const response = await api.get('/admin/kyc/rejected');
+  async getRejectedKYCs(preferredLanguage?: string): Promise<{ kycs: KYC[] }> {
+    const params = preferredLanguage ? { language: preferredLanguage } : {};
+    const response = await api.get('/admin/kyc/rejected', { params });
     return response.data;
   },
 

@@ -9,11 +9,31 @@ import { AuthRequest } from '../types';
 export class AdminController {
   async getAllPendingKYC(req: AuthRequest, res: Response): Promise<void> {
     try {
+      const preferredLanguage = req.query.language as string || 'English';
       const kycs = await KYC.find({ status: 'pending' })
         .populate('userId', 'email fullName phoneNumber')
         .sort({ createdAt: -1 });
       
-      res.json({ kycs });
+      // Translate if requested
+      if (preferredLanguage && preferredLanguage !== 'English') {
+        const translatedKycs = await Promise.all(
+          kycs.map(async (kyc) => {
+            const kycObj = kyc.toObject();
+            if (kyc.summary) {
+              const translated = await multiLanguageService.translateText(kyc.summary, preferredLanguage);
+              kycObj.summary = translated;
+            }
+            if (kyc.rejectionReason) {
+              const translated = await multiLanguageService.translateText(kyc.rejectionReason, preferredLanguage);
+              kycObj.rejectionReason = translated;
+            }
+            return kycObj;
+          })
+        );
+        res.json({ kycs: translatedKycs });
+      } else {
+        res.json({ kycs });
+      }
     } catch (error: any) {
       console.error('Get pending KYC error:', error);
       res.status(500).json({ error: 'Failed to fetch pending KYCs' });
@@ -22,11 +42,31 @@ export class AdminController {
   
   async getAllApprovedKYC(req: AuthRequest, res: Response): Promise<void> {
     try {
+      const preferredLanguage = req.query.language as string || 'English';
       const kycs = await KYC.find({ status: 'approved' })
         .populate('userId', 'email fullName phoneNumber')
         .sort({ reviewedAt: -1 });
       
-      res.json({ kycs });
+      // Translate if requested
+      if (preferredLanguage && preferredLanguage !== 'English') {
+        const translatedKycs = await Promise.all(
+          kycs.map(async (kyc) => {
+            const kycObj = kyc.toObject();
+            if (kyc.summary) {
+              const translated = await multiLanguageService.translateText(kyc.summary, preferredLanguage);
+              kycObj.summary = translated;
+            }
+            if (kyc.rejectionReason) {
+              const translated = await multiLanguageService.translateText(kyc.rejectionReason, preferredLanguage);
+              kycObj.rejectionReason = translated;
+            }
+            return kycObj;
+          })
+        );
+        res.json({ kycs: translatedKycs });
+      } else {
+        res.json({ kycs });
+      }
     } catch (error: any) {
       console.error('Get approved KYC error:', error);
       res.status(500).json({ error: 'Failed to fetch approved KYCs' });
@@ -35,11 +75,31 @@ export class AdminController {
   
   async getAllRejectedKYC(req: AuthRequest, res: Response): Promise<void> {
     try {
+      const preferredLanguage = req.query.language as string || 'English';
       const kycs = await KYC.find({ status: 'rejected' })
         .populate('userId', 'email fullName phoneNumber')
         .sort({ reviewedAt: -1 });
       
-      res.json({ kycs });
+      // Translate if requested
+      if (preferredLanguage && preferredLanguage !== 'English') {
+        const translatedKycs = await Promise.all(
+          kycs.map(async (kyc) => {
+            const kycObj = kyc.toObject();
+            if (kyc.summary) {
+              const translated = await multiLanguageService.translateText(kyc.summary, preferredLanguage);
+              kycObj.summary = translated;
+            }
+            if (kyc.rejectionReason) {
+              const translated = await multiLanguageService.translateText(kyc.rejectionReason, preferredLanguage);
+              kycObj.rejectionReason = translated;
+            }
+            return kycObj;
+          })
+        );
+        res.json({ kycs: translatedKycs });
+      } else {
+        res.json({ kycs });
+      }
     } catch (error: any) {
       console.error('Get rejected KYC error:', error);
       res.status(500).json({ error: 'Failed to fetch rejected KYCs' });

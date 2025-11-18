@@ -7,18 +7,20 @@ export const kycService = {
     return response.data;
   },
 
-  async getMyKYC(): Promise<{ kyc: KYC }> {
-    const response = await api.get('/kyc/my-kyc');
+  async getMyKYC(preferredLanguage?: string): Promise<{ kyc: KYC }> {
+    const params = preferredLanguage ? { language: preferredLanguage } : {};
+    const response = await api.get('/kyc/my-kyc', { params });
     return response.data;
   },
 
-  async getKYCStatus(): Promise<{
+  async getKYCStatus(preferredLanguage?: string): Promise<{
     status: string;
     submittedAt?: string;
     reviewedAt?: string;
     rejectionReason?: string;
   }> {
-    const response = await api.get('/kyc/status');
+    const params = preferredLanguage ? { language: preferredLanguage } : {};
+    const response = await api.get('/kyc/status', { params });
     return response.data;
   },
 };

@@ -1,0 +1,67 @@
+[2025-11-18T06:39:33.257Z] [INFO] Initializing KYC System {"version":"1.0.0","environment":"development"}
+[2025-11-18T06:39:33.262Z] [INFO] Connecting to MongoDB...
+[2025-11-18T06:39:33.291Z] [INFO] ✅ Connected to MongoDB
+[2025-11-18T06:39:33.292Z] [INFO] Connecting to RabbitMQ...
+[2025-11-18T06:39:33.319Z] [INFO] ✅ Connected to RabbitMQ
+[2025-11-18T06:39:33.319Z] [INFO] Starting queue processing...
+[2025-11-18T06:39:33.321Z] [INFO] ✅ Queue processing started
+[2025-11-18T06:39:33.332Z] [INFO] Default admin user already exists {"email":"admin@example.com"}
+[2025-11-18T06:39:33.335Z] [INFO] 🚀 Server is running on port 5000 {"port":"5000","api":"http://localhost:5000/api","health":"http://localhost:5000/health"}
+[2025-11-18T06:40:36.137Z] [INFO] Initializing KYC System {"version":"1.0.0","environment":"development"}
+[2025-11-18T06:40:36.140Z] [INFO] Connecting to MongoDB...
+[2025-11-18T06:40:36.177Z] [INFO] ✅ Connected to MongoDB
+[2025-11-18T06:40:36.177Z] [INFO] Connecting to RabbitMQ...
+[2025-11-18T06:40:36.207Z] [INFO] ✅ Connected to RabbitMQ
+[2025-11-18T06:40:36.208Z] [INFO] Starting queue processing...
+[2025-11-18T06:40:36.210Z] [INFO] ✅ Queue processing started
+[2025-11-18T06:40:36.224Z] [INFO] Default admin user already exists {"email":"admin@example.com"}
+[2025-11-18T06:40:36.228Z] [INFO] 🚀 Server is running on port 5000 {"port":"5000","api":"http://localhost:5000/api","health":"http://localhost:5000/health"}
+[2025-11-18T06:41:20.459Z] [INFO] Initializing KYC System {"version":"1.0.0","environment":"development"}
+[2025-11-18T06:41:20.463Z] [INFO] Connecting to MongoDB...
+[2025-11-18T06:41:20.491Z] [INFO] ✅ Connected to MongoDB
+[2025-11-18T06:41:20.491Z] [INFO] Connecting to RabbitMQ...
+[2025-11-18T06:41:20.519Z] [INFO] ✅ Connected to RabbitMQ
+[2025-11-18T06:41:20.519Z] [INFO] Starting queue processing...
+[2025-11-18T06:41:20.521Z] [INFO] ✅ Queue processing started
+[2025-11-18T06:41:20.533Z] [INFO] Default admin user already exists {"email":"admin@example.com"}
+[2025-11-18T06:41:20.536Z] [INFO] 🚀 Server is running on port 5000 {"port":"5000","api":"http://localhost:5000/api","health":"http://localhost:5000/health"}
+[2025-11-18T06:41:28.402Z] [INFO] Initializing KYC System {"version":"1.0.0","environment":"development"}
+[2025-11-18T06:41:28.405Z] [INFO] Connecting to MongoDB...
+[2025-11-18T06:41:28.436Z] [INFO] ✅ Connected to MongoDB
+[2025-11-18T06:41:28.437Z] [INFO] Connecting to RabbitMQ...
+[2025-11-18T06:41:28.470Z] [INFO] ✅ Connected to RabbitMQ
+[2025-11-18T06:41:28.470Z] [INFO] Starting queue processing...
+[2025-11-18T06:41:28.472Z] [INFO] ✅ Queue processing started
+[2025-11-18T06:41:28.486Z] [INFO] Default admin user already exists {"email":"admin@example.com"}
+[2025-11-18T06:41:28.489Z] [INFO] 🚀 Server is running on port 5000 {"port":"5000","api":"http://localhost:5000/api","health":"http://localhost:5000/health"}
+[2025-11-18T06:45:55.071Z] [INFO] Initializing KYC System {"version":"1.0.0","environment":"development"}
+[2025-11-18T06:45:55.075Z] [INFO] Connecting to MongoDB...
+[2025-11-18T06:45:55.108Z] [INFO] ✅ Connected to MongoDB
+[2025-11-18T06:45:55.109Z] [INFO] Connecting to RabbitMQ...
+[2025-11-18T06:45:55.149Z] [INFO] ✅ Connected to RabbitMQ
+[2025-11-18T06:45:55.150Z] [INFO] Starting queue processing...
+[2025-11-18T06:45:55.152Z] [INFO] ✅ Queue processing started
+[2025-11-18T06:45:55.185Z] [INFO] Default admin user already exists {"email":"admin@example.com"}
+[2025-11-18T06:45:55.188Z] [INFO] 🚀 Server is running on port 5000 {"port":"5000","api":"http://localhost:5000/api","health":"http://localhost:5000/health"}
+[2025-11-18T06:47:19.973Z] [INFO] Initializing KYC System {"version":"1.0.0","environment":"development"}
+[2025-11-18T06:47:19.976Z] [INFO] Connecting to MongoDB...
+[2025-11-18T06:47:20.012Z] [INFO] ✅ Connected to MongoDB
+[2025-11-18T06:47:20.012Z] [INFO] Connecting to RabbitMQ...
+[2025-11-18T06:47:20.047Z] [INFO] ✅ Connected to RabbitMQ
+[2025-11-18T06:47:20.048Z] [INFO] Starting queue processing...
+[2025-11-18T06:47:20.049Z] [INFO] ✅ Queue processing started
+[2025-11-18T06:47:20.078Z] [INFO] Default admin user already exists {"email":"admin@example.com"}
+[2025-11-18T06:47:20.081Z] [INFO] 🚀 Server is running on port 5000 {"port":"5000","api":"http://localhost:5000/api","health":"http://localhost:5000/health"}
+[2025-11-18T06:48:10.469Z] [INFO] GET /api/auth/me {"method":"GET","path":"/api/auth/me","ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"}
+[2025-11-18T06:48:10.494Z] [INFO] GET /api/auth/me {"method":"GET","path":"/api/auth/me","ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"}
+[2025-11-18T06:48:22.047Z] [INFO] POST /api/auth/login {"method":"POST","path":"/api/auth/login","ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"}
+[2025-11-18T06:48:22.263Z] [INFO] GET /api/kyc/my-kyc {"method":"GET","path":"/api/kyc/my-kyc","ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"}
+[2025-11-18T06:48:22.325Z] [INFO] GET /api/kyc/my-kyc {"method":"GET","path":"/api/kyc/my-kyc","ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"}
+[2025-11-18T06:48:48.982Z] [INFO] POST /api/auth/login {"method":"POST","path":"/api/auth/login","ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"}
+[2025-11-18T06:48:49.154Z] [INFO] GET /api/admin/kyc/stats {"method":"GET","path":"/api/admin/kyc/stats","ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"}
+[2025-11-18T06:48:49.202Z] [INFO] GET /api/admin/kyc/stats {"method":"GET","path":"/api/admin/kyc/stats","ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"}
+[2025-11-18T07:05:59.401Z] [INFO] GET /api/auth/me {"method":"GET","path":"/api/auth/me","ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"}
+[2025-11-18T07:05:59.437Z] [INFO] GET /api/auth/me {"method":"GET","path":"/api/auth/me","ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"}
+[2025-11-18T07:05:59.457Z] [INFO] GET /api/admin/kyc/stats {"method":"GET","path":"/api/admin/kyc/stats","ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"}
+[2025-11-18T07:05:59.467Z] [INFO] GET /api/admin/kyc/stats {"method":"GET","path":"/api/admin/kyc/stats","ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"}
+[2025-11-18T07:06:41.177Z] [INFO] Received SIGINT, shutting down gracefully...

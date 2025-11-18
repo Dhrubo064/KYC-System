@@ -113,7 +113,7 @@ const Dashboard: React.FC = () => {
           {kyc!.status === 'pending' && (
             <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded">
               <p className="text-yellow-800">
-                Your KYC is being reviewed by our team. We'll notify you once it's processed.
+                Your KYC is being reviewed by our team. We will notify you once it is processed.
               </p>
             </div>
           )}

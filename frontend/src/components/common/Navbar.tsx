@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
                   to={isAdmin ? "/admin/dashboard" : "/dashboard"}
                   className="px-4 py-2 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition duration-300 shadow-md"
                 >
-                  {isAdmin ? "Admin Dashboard" : "Dashboard"}
+                  {isAdmin ? 'Admin Dashboard' : 'Dashboard'}
                 </Link>
 
                 {/* Dropdown Menu */}
@@ -68,37 +68,37 @@ const Navbar: React.FC = () => {
                   {isDropdownOpen && (
                     <div className="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-lg shadow-xl py-2 z-50">
                       {!isAdmin && (
-                        <Link
-                          to="/kyc-form"
-                          className="block px-4 py-2 hover:bg-blue-50 transition"
-                          onClick={() => setIsDropdownOpen(false)}
-                        >
-                          Submit KYC
-                        </Link>
+                          <Link
+                            to="/kyc-form"
+                            className="block px-4 py-2 hover:bg-blue-50 transition"
+                            onClick={() => setIsDropdownOpen(false)}
+                          >
+                            Submit KYC
+                          </Link>
                       )}
                       {isAdmin && (
                         <>
-                          <Link
-                            to="/admin/kyc/pending"
-                            className="block px-4 py-2 hover:bg-blue-50 transition"
-                            onClick={() => setIsDropdownOpen(false)}
-                          >
-                            Pending KYCs
-                          </Link>
-                          <Link
-                            to="/admin/kyc/approved"
-                            className="block px-4 py-2 hover:bg-blue-50 transition"
-                            onClick={() => setIsDropdownOpen(false)}
-                          >
-                            Approved
-                          </Link>
-                          <Link
-                            to="/admin/kyc/rejected"
-                            className="block px-4 py-2 hover:bg-blue-50 transition"
-                            onClick={() => setIsDropdownOpen(false)}
-                          >
-                            Rejected
-                          </Link>
+                            <Link
+                              to="/admin/kyc/pending"
+                              className="block px-4 py-2 hover:bg-blue-50 transition"
+                              onClick={() => setIsDropdownOpen(false)}
+                            >
+                              Pending KYCs
+                            </Link>
+                            <Link
+                              to="/admin/kyc/approved"
+                              className="block px-4 py-2 hover:bg-blue-50 transition"
+                              onClick={() => setIsDropdownOpen(false)}
+                            >
+                              Approved
+                            </Link>
+                            <Link
+                              to="/admin/kyc/rejected"
+                              className="block px-4 py-2 hover:bg-blue-50 transition"
+                              onClick={() => setIsDropdownOpen(false)}
+                            >
+                              Rejected
+                            </Link>
                         </>
                       )}
                       <hr className="my-2" />
